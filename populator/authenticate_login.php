@@ -2,24 +2,29 @@
 include 'db.php';
 session_start();
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $uid = mysqli_real_escape_string($db,$_POST['username']);
-    $pwd = mysqli_real_escape_string($db,$_POST['password']);
+if(isset($_REQUEST['LOGIN'])){
+    $uid =strip_tags($_REQUEST['username']);
+    $pwd =strip_tags($_REQUEST['password']);
 
-    $sql = "SELECT * FROM users WHERE username = '$uid' and password = '$pwd'";
-    $result = mysqli_query($db,$sql);
-    $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-    $active = $row['active'];
+    try{
+        $sql = "SELECT * FROM users WHERE username = :username AND password = :password";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(array(':username'=>$uid, ':password'=>$pwd));
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    $count = mysqli_num_rows($result);
-
-    if($count == 1) {
-        session_register("uid");
-        $_SESSION['login_user'] = $uid;
-
-       // header("location: welcome.php");
-    }else {
-        $error = "Your Login Name or Password is invalid";
+   if($sql->rowCount() > 0){
+    if($row['username'] == $uid && $row['password'] == $pwd){
+        $_SESSION['username'] = $row['username'];
+        $_SESSION['password'] = $row['password'];
+        header('location: index.php');
+    }else{
+        echo "Invalid username or password";
+    }
+   }else{
+    echo "Invalid username or password";
+   }
+    }catch(PDOException $e){
+        echo $e->getMessage();
     }
 }
 ?>

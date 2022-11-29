@@ -3,7 +3,7 @@
 <title>SIGN IN </title>
 <meta charset="utf-8">
 <!-- add css -->
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="./style.css">
 </head>
 <div class="menu">
 <body>

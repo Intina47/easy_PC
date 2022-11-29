@@ -8,7 +8,7 @@
 <div class="menu">
 <body>
 <h1>SIGN IN</h1>
-<form action="login.php" method="post">
+<form action="authenticate_login.php" method="post">
 <br><input type="text" name="username" id="username" placeholder = "email" required/><br>
 <br><input type="password" name="password" id="password" placeholder = "password" required /><br>
  <br> <button class="fpass" type="button">Forgot Password?</button><br>

@@ -1,5 +1,5 @@
--- SET FOREIGN_KEY_CHECKS = 0;
--- SET FOREIGN_KEY_CHECKS = 1;
+SET FOREIGN_KEY_CHECKS = 0;
+SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE IF NOT EXISTS `Staff`(
     `Staff_ID` INT PRIMARY KEY,
@@ -8,7 +8,8 @@ CREATE TABLE IF NOT EXISTS `Staff`(
     `Phone` INT NOT NULL UNIQUE,
     `Email` VARCHAR(20) NOT NULL UNIQUE,
     `Emergency_contact` INT,
-    `Salary` DECIMAL(7,2)
+    `Salary` DECIMAL(7,2),
+    `Role` VARCHAR(32)
 );
 
   CREATE TABLE IF NOT EXISTS `Shift`(
@@ -42,6 +43,7 @@ CREATE TABLE IF NOT EXISTS `Staff`(
     `Bulk_price` DECIMAL(7,2)
 );
 
+
   CREATE TABLE IF NOT EXISTS `Payment`(
     `Payment_ID` INT PRIMARY KEY NOT NULL,
     `Method` VARCHAR(20) NOT NULL
@@ -73,10 +75,9 @@ CREATE TABLE IF NOT EXISTS `Staff`(
     `First_Name` VARCHAR(70) NOT NULL,
     `Second_Name` VARCHAR(35) NOT NULL,
     `Email` VARCHAR(50) NOT NULL UNIQUE,
-    `BillingAddress_ID` INT NOT NULL,
-    `ShippingAddress_ID` INT NOT NULL,
+    `BillingAddress_ID` INT,
+    `ShippingAddress_ID` INT,
     `Password` VARCHAR(128) NOT NULL,
-    `Role` VARCHAR(32) NOT NULL,
     FOREIGN KEY(BillingAddress_ID) REFERENCES BillingAddress(BillingAddress_ID) ,
     FOREIGN KEY(ShippingAddress_ID) REFERENCES ShippingAddress(ShippingAddress_ID)
 );
@@ -100,3 +101,18 @@ CREATE TABLE IF NOT EXISTS `Staff`(
     FOREIGN KEY(BillingAddress_ID) REFERENCES BillingAddress(BillingAddress_ID),
     FOREIGN KEY(Payment_ID) REFERENCES Payment(Payment_ID)
 );
+
+-- VIEWS
+-------------------------------------------------------
+-- Product_image
+-- Product_name
+-- Retail_price
+-- Product_description
+CREATE VIEW CLIENTS_VIEW
+AS SELECT Product_image,Product_name,Retail_price,Product_description
+FROM Product
+
+Name
+Staff_ID
+
+

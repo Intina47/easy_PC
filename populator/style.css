@@ -1,6 +1,9 @@
 h1,p{
     text-align:center;
   }
+  .txt{
+    text-align: center;
+  }
 .txtbox{
   border-style: solid;
   border-width: 1px;
